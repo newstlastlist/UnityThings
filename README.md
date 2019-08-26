@@ -1,5 +1,5 @@
 # Section Creator For Unity
-This is universal script for creating between game object mesh and plane mesh.
+This is universal script for create section between game object mesh and plane mesh.
 For result of implementation of script you will get a List of Lists of Vectors 3 (List<List<Vector3>>) where each
 List<Vector3> is individual section (for example if you cut across torus you will get two sections).
 
