@@ -4,19 +4,19 @@ For result of implementation of script you will get a List of Lists of Vectors 3
 List<Vector3> is individual section (for example if you cut across torus you will get two sections).
 
 This script has 3 ways for set plane and get sections:
-* ###GameObject plane - create a plane in scene. 
+* ### GameObject plane - create a plane in scene. 
 
 List<List<Vector3>> segments = new **UniversalCutter()**.**SetPlaneByGameObj**(plane).**SortedIntersectionPoints**(this.gameObject);
       
 Where ***plane*** is GameObject.
 
-* ###Set plane by 3 points. 
+* ### Set plane by 3 points. 
 
 List<List<Vector3>> segments = new **UniversalCutter()**.**SetPlaneByThreePoints**(p1,p2,p3).**SortedIntersectionPoints**(this.gameObject);
       
 Where ***p1, p2, p3*** is points (Vector3) which lie in the plane which will be cut our mesh.
 
-* ###Set plane by point and normal.
+* ### Set plane by point and normal.
 
 List<List<Vector3>> segments = new **UniversalCutter()**.**SetPlaneByPointAndNormal**(point, normal).**SortedIntersectionPoints**(this.gameObject);
       
