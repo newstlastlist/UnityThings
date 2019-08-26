@@ -21,14 +21,7 @@ public class UniversalCutter
         Mesh objMesh = o.GetComponent<MeshFilter>().mesh;
         return objMesh.triangles;   
     }
-    public void DrawPoints(GameObject plane)
-    {
-        List<Vector3> planeVerts = GetGameObjVerts(plane);
-        Debug.DrawLine(planeVerts[0], new Vector3(10,10,10), Color.green, 110.0f);
-        Debug.DrawLine(planeVerts[14], new Vector3(10,10,10), Color.green, 110.0f);
-        Debug.DrawLine(planeVerts[44], new Vector3(10,10,10), Color.green, 110.0f);
-        
-    }
+ 
     
     public UniversalCutter SetPlaneByGameObj(GameObject plane)
     {
