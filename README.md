@@ -6,19 +6,19 @@ List<Vector3> is individual section (for example if you cut across torus you wil
 This script has 3 ways for set plane and get sections:
 * ### GameObject plane - create a plane in scene. 
 
-List<List<Vector3>> segments = new **UniversalCutter()**.**SetPlaneByGameObj**(plane).**SortedIntersectionPoints**(this.gameObject);
+```List<List<Vector3>> segments = new UniversalCutter().SetPlaneByGameObj(plane).SortedIntersectionPoints(this.gameObject);```
       
 Where ***plane*** is GameObject.
 
 * ### Set plane by 3 points. 
 
-List<List<Vector3>> segments = new **UniversalCutter()**.**SetPlaneByThreePoints**(p1,p2,p3).**SortedIntersectionPoints**(this.gameObject);
+```List<List<Vector3>> segments = new UniversalCutter().SetPlaneByThreePoints(p1,p2,p3).SortedIntersectionPoints(this.gameObject);```
       
 Where ***p1, p2, p3*** is points (Vector3) which lie in the plane which will be cut our mesh.
 
 * ### Set plane by point and normal.
 
-List<List<Vector3>> segments = new **UniversalCutter()**.**SetPlaneByPointAndNormal**(point, normal).**SortedIntersectionPoints**(this.gameObject);
+```List<List<Vector3>> segments = new UniversalCutter().SetPlaneByPointAndNormal(point,normal).SortedIntersectionPoints(this.gameObject);```
       
 Where ***point*** is point (Vector3) which lies in the plane which will be cut our mesh.
 ***normal*** is normal from this point which is perpendicular to the cutter plane.
