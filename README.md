@@ -12,7 +12,7 @@ List<List<Vector3>> segments = new UniversalCutter()
       .SortedIntersectionPoints(this.gameObject);
 ```
       
-Where ***plane*** is GameObject.
+Where ***plane*** is GameObject. And vertices (any 3 points which dont lie on one line) taken from mesh of GameObj plane.
 
 * ### Set plane by 3 points. 
 
