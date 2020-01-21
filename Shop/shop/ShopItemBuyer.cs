@@ -21,11 +21,12 @@ public class ShopItemBuyer : MonoBehaviour
             Debug.Log("Gold PrePurchase: " + LocalStorage.Gold);
 
             LocalStorage.Gold -= choosedItem.ShopItem.Cost;
-            LocalStorage.SoldHats[choosedItem.ShopItem.ID] = true;
+            LocalStorage.SoldItems[choosedItem.ShopItem.ID] = true;
 
 
             Debug.Log("Gold AfterPurchase: " + LocalStorage.Gold);
             Shop.Instance.ReInitShopItems();
+            UpdateShopGold();
         }
         else
         {
@@ -35,7 +36,10 @@ public class ShopItemBuyer : MonoBehaviour
         }
     }
     
-
+    private void UpdateShopGold()
+    {
+        Mediator.Publish(new UpdateShopGoldCommand());
+    }
     private void PlayerGOLDTest()
     {
         LocalStorage.Gold = 20000;
