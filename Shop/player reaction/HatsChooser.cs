@@ -8,7 +8,6 @@ public class HatsChooser : MonoBehaviour
 {
     public GameObject[] hats;
     private GameObject _currentHat;
-    [SerializeField] private Mediator _mediator;
 
 
     void Start()
@@ -17,7 +16,7 @@ public class HatsChooser : MonoBehaviour
         
         if(gameObject.tag == "player")
         {
-            _mediator.Subscribe<ChooseHatCommand>(ApplyHat);
+            Mediator.Subscribe<ChooseHatCommand>(ApplyHat);
             GameObject tempPrefab = new GameObject("EmptyHat");
             for (int i = 0; i < Shop.Instance.ShopItem.Length; i++)
             {

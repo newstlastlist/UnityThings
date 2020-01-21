@@ -4,12 +4,12 @@ using UnityEngine;
 
 
 public delegate void MediatorCallback<T>(T command) where T : ICommand;
-public class Mediator : MonoBehaviour
+public static class Mediator 
 {   
     //make sure you're using the System.Collections.Generic namespace
-    private Dictionary<System.Type, System.Delegate> _subscribers = new Dictionary<System.Type, System.Delegate>();
+    private static Dictionary<System.Type, System.Delegate> _subscribers = new Dictionary<System.Type, System.Delegate>();
  
-    public void Subscribe<T>(MediatorCallback<T> callback) where T : ICommand
+    public static void Subscribe<T>(MediatorCallback<T> callback) where T : ICommand
     {
         if(callback == null) throw new System.ArgumentNullException("callback");
         var tp = typeof(T);
@@ -19,7 +19,7 @@ public class Mediator : MonoBehaviour
             _subscribers.Add(tp, callback);
     }
  
-    public void DeleteSubscriber<T>(MediatorCallback<T> callback) where T : ICommand
+    public static void DeleteSubscriber<T>(MediatorCallback<T> callback) where T : ICommand
     {
         if(callback == null) throw new System.ArgumentNullException("callback");
         var tp = typeof(T);
@@ -32,7 +32,7 @@ public class Mediator : MonoBehaviour
         }
     }
  
-    public void Publish<T>(T command) where T : ICommand
+    public static void Publish<T>(T command) where T : ICommand
     {
         var tp = typeof(T);
         if(_subscribers.ContainsKey(tp))

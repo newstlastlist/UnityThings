@@ -11,13 +11,10 @@ public class ShopItemTemplaneBeh : MonoBehaviour
     private ShopHat _shopHat;
     [SerializeField] private TextMeshProUGUI _goldText;
     [SerializeField] private Image _image;
-    private Mediator _mediator;
 
     public ShopHat ShopHat { get => _shopHat; set => _shopHat = value; }
 
-    private void Start() {
-        _mediator = GameObject.FindGameObjectWithTag("Mediator").GetComponent<Mediator>();
-    }
+    
     public void Initialize()
     {
         var btn = GetComponent<Button>();
@@ -53,11 +50,11 @@ public class ShopItemTemplaneBeh : MonoBehaviour
 
     private void TryToBuy(ShopHat shopItemOnClick)
     {
-        _mediator.Publish( new TryTobuyItemCommand(shopItemOnClick));
+        Mediator.Publish( new TryTobuyItemCommand(shopItemOnClick));
     }
     private void ChooseItem(ShopHat shopItemOnClick)
     {
-        _mediator.Publish( new ChooseHatCommand(shopItemOnClick));
+        Mediator.Publish( new ChooseHatCommand(shopItemOnClick));
     }
     private void OpenHat(Image img, Button btn)
     {

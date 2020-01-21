@@ -5,10 +5,9 @@ using system;
 
 public class HatsBuyer : MonoBehaviour
 {
-    [SerializeField] private Mediator _mediator;
     void Start()
     {
-        _mediator.Subscribe<TryTobuyItemCommand>(TryToBuyHat);
+        Mediator.Subscribe<TryTobuyItemCommand>(TryToBuyHat);
         PlayerGOLDTest();
     }
 
