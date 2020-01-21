@@ -9,7 +9,7 @@ using TMPro;
 public class Shop : MonoBehaviour
 {
     [Header("List of items to sold")]
-    [SerializeField] private ShopHat[] _shopItem;
+    [SerializeField] private BaseItem[] _shopItem;
 
     [Header("References")]
     [SerializeField] private Transform _shopContainerTrans;
@@ -21,7 +21,7 @@ public class Shop : MonoBehaviour
 
     public static Shop Instance { get { return _instance; } }
 
-    public ShopHat[] ShopItem { get => _shopItem; private set => _shopItem = value; }
+    public BaseItem[] ShopItem { get => _shopItem; private set => _shopItem = value; }
 
     private void Awake()
     {
@@ -34,6 +34,12 @@ public class Shop : MonoBehaviour
     }
 
     private void Start() {
+        if(_shopItem.Length == 0)
+        {
+            Debug.Log("Assign Items In the Inspector!!!");
+            return;
+        }
+
         PopulateShop();
     }
 
@@ -45,7 +51,7 @@ public class Shop : MonoBehaviour
             GameObject item = Instantiate(_shopItemPrefab, _shopContainerTrans);
             ShopItemTemplaneBeh itemBeh = item.GetComponent<ShopItemTemplaneBeh>();
             _shopItemsBehList[i] = itemBeh;
-            itemBeh.ShopHat = _shopItem[i];
+            itemBeh.ShopItem = _shopItem[i];
             itemBeh.Initialize();
             
         }

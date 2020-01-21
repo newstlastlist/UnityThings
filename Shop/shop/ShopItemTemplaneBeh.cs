@@ -8,11 +8,11 @@ using system;
 
 public class ShopItemTemplaneBeh : MonoBehaviour
 {
-    private ShopHat _shopHat;
+    private BaseItem _shopItem;
     [SerializeField] private TextMeshProUGUI _goldText;
     [SerializeField] private Image _image;
 
-    public ShopHat ShopHat { get => _shopHat; set => _shopHat = value; }
+    public BaseItem ShopItem { get => _shopItem; set => _shopItem = value; }
 
     
     public void Initialize()
@@ -23,52 +23,53 @@ public class ShopItemTemplaneBeh : MonoBehaviour
         btn.onClick.RemoveAllListeners();
 
         //check for availability of hat in local storage. If Hat with this ID does not exist - we add this hat to localstorage
-        if(LocalStorage.SoldHats.ContainsKey(_shopHat.hatIDinLocalStorage) == false)
-            LocalStorage.SoldHats[_shopHat.hatIDinLocalStorage] = false;
+        if(LocalStorage.SoldHats.ContainsKey(_shopItem.ID) == false)
+            LocalStorage.SoldHats[_shopItem.ID] = false;
 
         //hat by level
-        if(_shopHat.isThisHatByLevel)
+        if(_shopItem is ShopHat)
         {
-            _goldText.text = _shopHat.levelNeeded.ToString() + " LVL";
-            if(LocalStorage.Level >= _shopHat.levelNeeded)
+            var hat = (ShopHat)_shopItem;
+            _goldText.text = hat.levelNeeded.ToString() + " LVL";
+            if(LocalStorage.Level >= hat.levelNeeded)
             {
-                OpenHat(img,btn);
+                OpenItem(img,btn);
                 return;
             }
             else return;
         }
         //hat by gold
-        _goldText.text = _shopHat.cost.ToString();
+        _goldText.text = _shopItem.Cost.ToString();
         //if hat is sold
-        if(LocalStorage.SoldHats[_shopHat.hatIDinLocalStorage] == true)
+        if(LocalStorage.SoldHats[_shopItem.ID] == true)
         {
-            OpenHat(img,btn);
+            OpenItem(img,btn);
         }
         else
-            btn.onClick.AddListener(() => TryToBuy(_shopHat));
+            btn.onClick.AddListener(() => TryToBuy(_shopItem));
     }
 
-    private void TryToBuy(ShopHat shopItemOnClick)
+    private void TryToBuy(BaseItem shopItemOnClick)
     {
         Mediator.Publish( new TryTobuyItemCommand(shopItemOnClick));
     }
-    private void ChooseItem(ShopHat shopItemOnClick)
+    private void ChooseItem(BaseItem shopItemOnClick)
     {
         Mediator.Publish( new ChooseHatCommand(shopItemOnClick));
     }
-    private void OpenHat(Image img, Button btn)
+    private void OpenItem(Image img, Button btn)
     {
-        img.sprite = _shopHat.sprite;
+        img.sprite = _shopItem.Sprite;
         _goldText.text = "";
-        btn.onClick.AddListener(() => ChooseItem(_shopHat));
+        btn.onClick.AddListener(() => ChooseItem(_shopItem));
     }
 }
 
 internal class TryTobuyItemCommand : ICommand
 {
-    private ShopHat _shopItem;
-    public ShopHat ShopHat { get => _shopItem; private set => _shopItem = value; }
-    public TryTobuyItemCommand(ShopHat shopItem)
+    private BaseItem _shopItem;
+    public BaseItem ShopItem { get => _shopItem; private set => _shopItem = value; }
+    public TryTobuyItemCommand(BaseItem shopItem)
     {
         _shopItem = shopItem;
     }
@@ -76,6 +77,6 @@ internal class TryTobuyItemCommand : ICommand
 }
 internal class ChooseHatCommand : TryTobuyItemCommand 
 {
-    public ChooseHatCommand(ShopHat shopItem) : base(shopItem) {}
+    public ChooseHatCommand(BaseItem shopItem) : base(shopItem) {}
 
 }

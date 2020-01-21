@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using system;
 
-public class HatsBuyer : MonoBehaviour
+public class ShopItemBuyer : MonoBehaviour
 {
     void Start()
     {
-        Mediator.Subscribe<TryTobuyItemCommand>(TryToBuyHat);
+        Mediator.Subscribe<TryTobuyItemCommand>(TryToBuyItem);
         PlayerGOLDTest();
     }
 
-    private void TryToBuyHat(TryTobuyItemCommand choosedItem)
+    private void TryToBuyItem(TryTobuyItemCommand choosedItem)
     {
 
         //can buy
-        if(LocalStorage.Gold > choosedItem.ShopHat.cost)
+        if(LocalStorage.Gold > choosedItem.ShopItem.Cost)
         {
-            Debug.Log("Hat Cost: " + choosedItem.ShopHat.cost);
+            Debug.Log("Item Cost: " + choosedItem.ShopItem.Cost);
             Debug.Log("Gold PrePurchase: " + LocalStorage.Gold);
 
-            LocalStorage.Gold -= choosedItem.ShopHat.cost;
-            LocalStorage.SoldHats[choosedItem.ShopHat.hatIDinLocalStorage] = true;
+            LocalStorage.Gold -= choosedItem.ShopItem.Cost;
+            LocalStorage.SoldHats[choosedItem.ShopItem.ID] = true;
 
 
             Debug.Log("Gold AfterPurchase: " + LocalStorage.Gold);
@@ -29,7 +29,7 @@ public class HatsBuyer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Hat Cost: " + choosedItem.ShopHat.cost);
+            Debug.Log("Item Cost: " + choosedItem.ShopItem.Cost);
             Debug.Log("Not enought gold! player has: " + LocalStorage.Gold);
 
         }
