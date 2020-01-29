@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
 //using UnityEditor;
 using UnityEngine;
 
@@ -12,12 +13,16 @@ namespace system {
             get { return Get("gold", () => 0); }
             set { Set("gold", value); }
         }
+        public static int GoldSpended {
+            get { return Get("goldSpended", () => 0); }
+            set { Set("goldSpended", value); }
+        }
 
         public static int LastChoosedHatID {
             get { return Get("lastChoosedHat", () => 0); }
             set { Set("lastChoosedHat", value); }
         }
-        public static Dictionary<int,bool> SoldHats {
+        public static Dictionary<int,bool> SoldItems {
             get { return Get("score", () => new Dictionary<int, bool>(){{0, true}}); }
             set { Set("score", value); }
         }
@@ -29,6 +34,13 @@ namespace system {
                 return v == 0 ? 1 : v;
             }
             set { Set("level", value); }
+        }
+        public static StaticThings.ShopType ShopType {
+            get {
+                return  Get("ShopType", () => StaticThings.ShopType.Base);
+
+            }
+            set { Set("ShopType", value); }
         }
 
    
@@ -58,6 +70,18 @@ namespace system {
                 }
             }
         }
+        #if UNITY_EDITOR
+        [MenuItem("LocalStorage/Clear")]
+        private static void ClearAllData()
+        {
+            var path = Application.persistentDataPath + "/data.dt";
+            if(File.Exists(path))
+            {
+                _data.Clear();
+                File.Delete(path);
+            }
+        }
+        #endif
 
         private static T Get<T>(string key, Func<T> init) {
             if (Data.ContainsKey(key))

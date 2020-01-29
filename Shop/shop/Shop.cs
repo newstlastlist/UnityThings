@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Tracing;
+﻿using System.Linq;
+using System.Diagnostics.Tracing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +9,12 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     [Header("List of items to sold")]
-    [SerializeField] private BaseItem[] _shopItem;
+    [SerializeField] private BaseShopItem[] _shopItem;
 
     [Header("References")]
     [SerializeField] private Transform _shopContainerTrans;
     [SerializeField] private GameObject _shopItemPrefab;
+    [SerializeField] private GameObject _notEnoughCoins;
     [Space]
     private ShopItemTemplaneBeh[] _shopItemsBehList;
 
@@ -20,7 +22,8 @@ public class Shop : MonoBehaviour
 
     public static Shop Instance { get { return _instance; } }
 
-    public BaseItem[] ShopItem { get => _shopItem; private set => _shopItem = value; }
+    public BaseShopItem[] ShopItem { get => _shopItem; private set => _shopItem = value; }
+    public GameObject NotEnoughCoins { get => _notEnoughCoins; set => _notEnoughCoins = value; }
 
     private void Awake()
     {
@@ -33,12 +36,14 @@ public class Shop : MonoBehaviour
     }
 
     private void Start() {
+        _notEnoughCoins.SetActive(false);
         if(_shopItem.Length == 0)
         {
             Debug.Log("Assign Items In the Inspector!!!");
             return;
         }
-
+        ShopItem = ShopItem.OrderByDescending(item => item.OrderInShopPriority()).ToArray();
+        
         PopulateShop();
     }
 
