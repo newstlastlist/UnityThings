@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ShopItemTemplateArgumentWrapper
+public class ShopItemPrefabArgumentWrapper
 {
     public TextMeshProUGUI GoldText {get; set;}
     public TextMeshProUGUI AchivText {get; set;}
