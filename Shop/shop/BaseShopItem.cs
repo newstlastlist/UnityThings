@@ -12,7 +12,7 @@ public abstract class BaseShopItem : ScriptableObject
     public abstract int OrderInShopPriority();
     
 
-    public abstract void Init(ShopItemTemplateArgumentWrapper arguments);
+    public abstract void Init(ShopItemPrefabArgumentWrapper arguments);
     public virtual void OpenItem(Image image, Button button, GameObject price, BaseShopItem shopItem)
     {
         image.sprite = Sprite;

@@ -16,7 +16,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject _shopItemPrefab;
     [SerializeField] private GameObject _notEnoughCoins;
     [Space]
-    private ShopItemTemplaneBeh[] _shopItemsBehList;
+    private ShopItemPrefab[] _shopItemsBehList;
 
     private static Shop _instance;
 
@@ -49,11 +49,11 @@ public class Shop : MonoBehaviour
 
     private void PopulateShop()
     {
-        _shopItemsBehList = new ShopItemTemplaneBeh[_shopItem.Length];
+        _shopItemsBehList = new ShopItemPrefab[_shopItem.Length];
         for (int i = 0; i < _shopItem.Length; i++)
         {
             GameObject item = Instantiate(_shopItemPrefab, _shopContainerTrans);
-            ShopItemTemplaneBeh itemBeh = item.GetComponent<ShopItemTemplaneBeh>();
+            ShopItemPrefab itemBeh = item.GetComponent<ShopItemPrefab>();
             _shopItemsBehList[i] = itemBeh;
             itemBeh.ShopItem = _shopItem[i];
             itemBeh.Initialize();

@@ -21,7 +21,7 @@ public class ShopItemForAchiv :  BaseShopItem, IItemForAchievement
     public override string Name { get => _name; set => _name = value; }
     public int AchievementValueNeeded { get => _AchievementValueNeeded; set => _AchievementValueNeeded = value; }
 
-    public override void Init(ShopItemTemplateArgumentWrapper reffer)
+    public override void Init(ShopItemPrefabArgumentWrapper reffer)
     {
         if(ID == LocalStorage.LastChoosedHatID)
             reffer.ChoosedItemFrame.SetActive(true);

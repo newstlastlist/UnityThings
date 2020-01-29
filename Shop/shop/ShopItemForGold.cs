@@ -25,7 +25,7 @@ public class ShopItemForGold : BaseShopItem, IItemForGold
     public override string Name { get => _name; set => _name = value; }
     public int Cost { get => _cost; set => _cost = value; }
 
-    public override void Init(ShopItemTemplateArgumentWrapper reffer)
+    public override void Init(ShopItemPrefabArgumentWrapper reffer)
     {
         if (ID == LocalStorage.LastChoosedHatID)
             reffer.ChoosedItemFrame.SetActive(true);

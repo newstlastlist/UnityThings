@@ -7,7 +7,7 @@ using TMPro;
 using system;
 using System.Globalization;
 
-public class ShopItemTemplaneBeh : MonoBehaviour
+public class ShopItemPrefab : MonoBehaviour
 {
     private BaseShopItem _shopItem;
     [SerializeField] private TextMeshProUGUI _goldText;
@@ -49,7 +49,7 @@ public class ShopItemTemplaneBeh : MonoBehaviour
         if(LocalStorage.SoldItems.ContainsKey(_shopItem.ID) == false)
             LocalStorage.SoldItems[_shopItem.ID] = false;
         
-        var reffer = new ShopItemTemplateArgumentWrapper();
+        var reffer = new ShopItemPrefabArgumentWrapper();
         reffer.AchivText = _achivText;
         reffer.ChoosedItemFrame = _choosedItemFrame;
         reffer.GoldText = _goldText;
